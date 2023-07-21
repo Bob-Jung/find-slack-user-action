@@ -13,9 +13,7 @@ async function run() {
     }
 
     var success = true
-    const response = await slack.users.lookupByEmail({token:slackToken, email:email}).catch(err => {
-      success = false
-    })
+    const response = await slack.users.lookupByEmail({token:slackToken, email:email})
 
     core.setOutput("found-user", success)
     core.setOutput("username", success ? (includeAtSymbol ? '@' : '').concat(response.user.name) : core.getInput('default-username', { required: false }))
